@@ -10,6 +10,9 @@ import (
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/germesdev/gorm"
+	_ "github.com/germesdev/gorm/dialects/sqlite"
+	"gopkg.in/stretchr/testify.v1/assert"
 )
 
 var databases []database
