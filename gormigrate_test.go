@@ -4,8 +4,8 @@ import (
 	"log"
 	"testing"
 
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"github.com/germesdev/gorm"
+	_ "github.com/germesdev/gorm/dialects/sqlite"
 	"gopkg.in/stretchr/testify.v1/assert"
 )
 
