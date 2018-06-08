@@ -233,6 +233,10 @@ func (g *Gormigrate) createMigrationTableIfNotExists() error {
 	}
 
 	sql := fmt.Sprintf("CREATE TABLE %s (%s VARCHAR(%d) PRIMARY KEY)", g.options.TableName, g.options.IDColumnName, g.options.IDColumnSize)
+
+	if g.db.Dialect().GetName() == "clickhouse" {
+		sql = fmt.Sprintf("CREATE TABLE %s (%s String) ENGINE = TinyLog", g.options.TableName, g.options.IDColumnName)
+	}
 	if err := g.db.Exec(sql).Error; err != nil {
 		return err
 	}
