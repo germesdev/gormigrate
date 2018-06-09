@@ -195,6 +195,9 @@ func (g *Gormigrate) migrate(migrationID string) error {
 	}
 
 	for _, migration := range g.migrations {
+		if g.db.Dialect().GetName() == "clickhouse" {
+			g.begin()
+		}
 		if err := g.runMigration(migration); err != nil {
 			return err
 		}
