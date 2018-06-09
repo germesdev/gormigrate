@@ -117,9 +117,8 @@ func (g *Gormigrate) Migrate() error {
 		return err
 	}
 
-	g.begin()
-
 	if g.initSchema != nil && g.isFirstRun() {
+		g.begin()
 		if err := g.runInitSchema(); err != nil {
 			g.rollback()
 			return err
@@ -128,6 +127,9 @@ func (g *Gormigrate) Migrate() error {
 	}
 
 	for _, migration := range g.migrations {
+		if g.db.Dialect().GetName() == "clickhouse" {
+			g.begin()
+		}
 		if err := g.runMigration(migration); err != nil {
 			g.rollback()
 			return err
